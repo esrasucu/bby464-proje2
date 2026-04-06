@@ -1,0 +1,61 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://hacettepe.edu.tr/esra/ontology#> .
+
+# --- CLASS DEFINITIONS ---
+ex:Movie a rdfs:Class ;
+         rdfs:label "Movie" ;
+         rdfs:subClassOf schema:Movie .
+
+ex:Director a rdfs:Class ;
+            rdfs:label "Director" ;
+            rdfs:subClassOf schema:Person .
+
+# --- PROPERTY DEFINITIONS ---
+ex:hasRating a rdf:Property ;
+             rdfs:label "Rating" ;
+             rdfs:domain ex:Movie ;
+             rdfs:range xsd:decimal .
+
+ex:releaseYear a rdf:Property ;
+               rdfs:label "Release Year" ;
+               rdfs:domain ex:Movie ;
+               rdfs:range xsd:integer .
+
+# --- INSTANCES & TRIPLES ---
+
+# Directors
+ex:D01 a ex:Director ; schema:name "Christopher Nolan" .
+ex:D02 a ex:Director ; schema:name "Quentin Tarantino" .
+ex:D03 a ex:Director ; schema:name "Bong Joon-ho" .
+ex:D04 a ex:Director ; schema:name "Wes Anderson" .
+ex:D05 a ex:Director ; schema:name "Stanley Kubrick" .
+ex:D06 a ex:Director ; schema:name "Martin Scorsese" .
+ex:D07 a ex:Director ; schema:name "Damien Chazelle" .
+ex:D08 a ex:Director ; schema:name "Denis Villeneuve" .
+ex:D09 a ex:Director ; schema:name "David Fincher" .
+
+# Movies (21 Films)
+ex:M01 a ex:Movie ; schema:name "Inception" ; ex:releaseYear "2010"^^xsd:integer ; ex:hasRating "8.8"^^xsd:decimal ; schema:director ex:D01 ; schema:genre "Sci-Fi" .
+ex:M02 a ex:Movie ; schema:name "Interstellar" ; ex:releaseYear "2014"^^xsd:integer ; ex:hasRating "8.7"^^xsd:decimal ; schema:director ex:D01 ; schema:genre "Sci-Fi" .
+ex:M03 a ex:Movie ; schema:name "The Dark Knight" ; ex:releaseYear "2008"^^xsd:integer ; ex:hasRating "9.0"^^xsd:decimal ; schema:director ex:D01 ; schema:genre "Action" .
+ex:M04 a ex:Movie ; schema:name "Pulp Fiction" ; ex:releaseYear "1994"^^xsd:integer ; ex:hasRating "8.9"^^xsd:decimal ; schema:director ex:D02 ; schema:genre "Crime" .
+ex:M05 a ex:Movie ; schema:name "Django Unchained" ; ex:releaseYear "2012"^^xsd:integer ; ex:hasRating "8.4"^^xsd:decimal ; schema:director ex:D02 ; schema:genre "Crime" .
+ex:M06 a ex:Movie ; schema:name "Kill Bill" ; ex:releaseYear "2003"^^xsd:integer ; ex:hasRating "8.2"^^xsd:decimal ; schema:director ex:D02 ; schema:genre "Action" .
+ex:M07 a ex:Movie ; schema:name "Parasite" ; ex:releaseYear "2019"^^xsd:integer ; ex:hasRating "8.5"^^xsd:decimal ; schema:director ex:D03 ; schema:genre "Thriller" .
+ex:M08 a ex:Movie ; schema:name "Snowpiercer" ; ex:releaseYear "2013"^^xsd:integer ; ex:hasRating "7.1"^^xsd:decimal ; schema:director ex:D03 ; schema:genre "Sci-Fi" .
+ex:M09 a ex:Movie ; schema:name "The Grand Budapest Hotel" ; ex:releaseYear "2014"^^xsd:integer ; ex:hasRating "8.1"^^xsd:decimal ; schema:director ex:D04 ; schema:genre "Comedy" .
+ex:M10 a ex:Movie ; schema:name "Fantastic Mr. Fox" ; ex:releaseYear "2009"^^xsd:integer ; ex:hasRating "7.9"^^xsd:decimal ; schema:director ex:D04 ; schema:genre "Animation" .
+ex:M11 a ex:Movie ; schema:name "The Shining" ; ex:releaseYear "1980"^^xsd:integer ; ex:hasRating "8.4"^^xsd:decimal ; schema:director ex:D05 ; schema:genre "Horror" .
+ex:M12 a ex:Movie ; schema:name "2001: A Space Odyssey" ; ex:releaseYear "1968"^^xsd:integer ; ex:hasRating "8.3"^^xsd:decimal ; schema:director ex:D05 ; schema:genre "Sci-Fi" .
+ex:M13 a ex:Movie ; schema:name "The Departed" ; ex:releaseYear "2006"^^xsd:integer ; ex:hasRating "8.5"^^xsd:decimal ; schema:director ex:D06 ; schema:genre "Crime" .
+ex:M14 a ex:Movie ; schema:name "Goodfellas" ; ex:releaseYear "1990"^^xsd:integer ; ex:hasRating "8.7"^^xsd:decimal ; schema:director ex:D06 ; schema:genre "Crime" .
+ex:M15 a ex:Movie ; schema:name "Whiplash" ; ex:releaseYear "2014"^^xsd:integer ; ex:hasRating "8.5"^^xsd:decimal ; schema:director ex:D07 ; schema:genre "Drama" .
+ex:M16 a ex:Movie ; schema:name "La La Land" ; ex:releaseYear "2016"^^xsd:integer ; ex:hasRating "8.0"^^xsd:decimal ; schema:director ex:D07 ; schema:genre "Drama" .
+ex:M17 a ex:Movie ; schema:name "Arrival" ; ex:releaseYear "2016"^^xsd:integer ; ex:hasRating "7.9"^^xsd:decimal ; schema:director ex:D08 ; schema:genre "Sci-Fi" .
+ex:M18 a ex:Movie ; schema:name "Dune" ; ex:releaseYear "2021"^^xsd:integer ; ex:hasRating "8.0"^^xsd:decimal ; schema:director ex:D08 ; schema:genre "Sci-Fi" .
+ex:M19 a ex:Movie ; schema:name "Fight Club" ; ex:releaseYear "1999"^^xsd:integer ; ex:hasRating "8.8"^^xsd:decimal ; schema:director ex:D09 ; schema:genre "Drama" .
+ex:M20 a ex:Movie ; schema:name "Seven" ; ex:releaseYear "1995"^^xsd:integer ; ex:hasRating "8.6"^^xsd:decimal ; schema:director ex:D09 ; schema:genre "Crime" .
+ex:M21 a ex:Movie ; schema:name "The Social Network" ; ex:releaseYear "2010"^^xsd:integer ; ex:hasRating "7.8"^^xsd:decimal ; schema:director ex:D09 ; schema:genre "Drama" .

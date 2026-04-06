@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories_database>
+    <category id="G01"><name>Bilim Kurgu</name></category>
+    <category id="G02"><name>Aksiyon</name></category>
+    <category id="G03"><name>Suç</name></category>
+    <category id="G04"><name>Gerilim</name></category>
+    <category id="G05"><name>Komedi</name></category>
+    <category id="G06"><name>Animasyon</name></category>
+    <category id="G07"><name>Korku</name></category>
+    <category id="G08"><name>Drama</name></category>
+</categories_database>

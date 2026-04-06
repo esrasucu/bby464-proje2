@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<movie_database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema.xsd">
+    <movie id="M01"><title>Inception</title><genreRef>G01</genreRef><year>2010</year><rating>8.8</rating><dirRef>D01</dirRef></movie>
+    <movie id="M02"><title>Interstellar</title><genreRef>G01</genreRef><year>2014</year><rating>8.7</rating><dirRef>D01</dirRef></movie>
+    <movie id="M03"><title>The Dark Knight</title><genreRef>G02</genreRef><year>2008</year><rating>9.0</rating><dirRef>D01</dirRef></movie>
+    <movie id="M04"><title>Pulp Fiction</title><genreRef>G03</genreRef><year>1994</year><rating>8.9</rating><dirRef>D02</dirRef></movie>
+    <movie id="M05"><title>Django Unchained</title><genreRef>G03</genreRef><year>2012</year><rating>8.4</rating><dirRef>D02</dirRef></movie>
+    <movie id="M06"><title>Kill Bill</title><genreRef>G02</genreRef><year>2003</year><rating>8.2</rating><dirRef>D02</dirRef></movie>
+    <movie id="M07"><title>Parasite</title><genreRef>G04</genreRef><year>2019</year><rating>8.5</rating><dirRef>D03</dirRef></movie>
+    <movie id="M08"><title>Snowpiercer</title><genreRef>G01</genreRef><year>2013</year><rating>7.1</rating><dirRef>D03</dirRef></movie>
+    <movie id="M09"><title>The Grand Budapest Hotel</title><genreRef>G05</genreRef><year>2014</year><rating>8.1</rating><dirRef>D04</dirRef></movie>
+    <movie id="M10"><title>Fantastic Mr. Fox</title><genreRef>G06</genreRef><year>2009</year><rating>7.9</rating><dirRef>D04</dirRef></movie>
+    <movie id="M11"><title>The Shining</title><genreRef>G07</genreRef><year>1980</year><rating>8.4</rating><dirRef>D05</dirRef></movie>
+    <movie id="M12"><title>2001: A Space Odyssey</title><genreRef>G01</genreRef><year>1968</year><rating>8.3</rating><dirRef>D05</dirRef></movie>
+    <movie id="M13"><title>The Departed</title><genreRef>G03</genreRef><year>2006</year><rating>8.5</rating><dirRef>D06</dirRef></movie>
+    <movie id="M14"><title>Goodfellas</title><genreRef>G03</genreRef><year>1990</year><rating>8.7</rating><dirRef>D06</dirRef></movie>
+    <movie id="M15"><title>Whiplash</title><genreRef>G08</genreRef><year>2014</year><rating>8.5</rating><dirRef>D07</dirRef></movie>
+    <movie id="M16"><title>La La Land</title><genreRef>G08</genreRef><year>2016</year><rating>8.0</rating><dirRef>D07</dirRef></movie>
+    <movie id="M17"><title>Arrival</title><genreRef>G01</genreRef><year>2016</year><rating>7.9</rating><dirRef>D08</dirRef></movie>
+    <movie id="M18"><title>Dune</title><genreRef>G01</genreRef><year>2021</year><rating>8.0</rating><dirRef>D08</dirRef></movie>
+    <movie id="M19"><title>Fight Club</title><genreRef>G08</genreRef><year>1999</year><rating>8.8</rating><dirRef>D09</dirRef></movie>
+    <movie id="M20"><title>Seven</title><genreRef>G03</genreRef><year>1995</year><rating>8.6</rating><dirRef>D09</dirRef></movie>
+    <movie id="M21"><title>The Social Network</title><genreRef>G08</genreRef><year>2010</year><rating>7.8</rating><dirRef>D09</dirRef></movie>
+</movie_database>

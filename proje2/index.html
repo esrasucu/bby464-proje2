@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sine-Sinema | Film Keşif Platformu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+
+        /* Öneri Kartları Tasarımı */
+    .recommendation-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px dashed #eee;
+    }
+    .recommendation-title {
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--purple-vibrant);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    }
+   .rec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+.rec-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid transparent;
+}
+.rec-card:hover {
+    background: white;
+    border-color: var(--teal-vibrant);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.rec-img {
+    width: 40px;
+    height: 55px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+.rec-info h4 {
+    font-size: 13px;
+    margin: 0;
+    color: var(--navy);
+}
+.rec-info small {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+        :root {
+            /* Canlı ve Modern Renk Paleti */
+            --navy: #0f172a;
+            --purple-vibrant: #6366f1;
+            --pink-vibrant: #ec4899;
+            --teal-vibrant: #14b8a6;
+            --bg-light: #f8fafc;
+            --card-white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.04);
+            --shadow-bold: 0 20px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--bg-light); 
+            color: var(--text-main); 
+            display: flex; 
+            height: 100vh; 
+            overflow: hidden; 
+        }
+
+        /* ── SOL SIDEBAR (BİLGİ & ARAMA) ── */
+        .sidebar {
+            width: 420px;
+            background: linear-gradient(165deg, var(--navy) 0%, #1e1b4b 100%);
+            color: white;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 10px 0 50px rgba(0,0,0,0.1);
+        }
+
+        .sidebar::before {
+            content: ''; position: absolute; top: -10%; right: -10%; width: 300px; height: 300px;
+            background: var(--purple-vibrant); filter: blur(120px); opacity: 0.15; border-radius: 50%;
+        }
+
+        .brand h1 { 
+            font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 900; 
+            line-height: 1; margin-bottom: 20px; letter-spacing: -1px;
+        }
+        .brand h1 span { color: var(--teal-vibrant); }
+        .brand p { font-size: 17px; font-weight: 300; opacity: 0.7; line-height: 1.6; margin-bottom: 40px; }
+
+        /* Arama Kutusu (Gelişmiş) */
+        .search-wrapper { position: relative; }
+        .search-wrapper input {
+            width: 100%; padding: 18px 25px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05); color: white; font-family: 'Outfit', sans-serif;
+            font-size: 16px; outline: none; transition: 0.3s;
+        }
+        .search-wrapper input:focus { background: rgba(255,255,255,0.1); border-color: var(--purple-vibrant); box-shadow: 0 0 20px rgba(99, 102, 241, 0.2); }
+
+        /* İndirme Alanı (Aşama 5) */
+        .sidebar-footer { margin-top: auto; }
+        .dl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .dl-card {
+            padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; text-decoration: none; color: rgba(255,255,255,0.8); font-size: 12px;
+            text-align: center; transition: 0.2s; font-weight: 600;
+        }
+        .dl-card:hover { background: var(--purple-vibrant); color: white; border-color: var(--purple-vibrant); transform: translateY(-3px); }
+
+        /* ── SAĞ İÇERİK ALANI ── */
+        .main-content { flex: 1; overflow-y: auto; padding: 60px 5vw; scroll-behavior: smooth; }
+        .content-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+        .content-header h2 { font-size: 32px; font-weight: 800; color: var(--navy); }
+        .movie-count-badge { padding: 6px 14px; background: var(--white); border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--purple-vibrant); box-shadow: var(--shadow-soft); }
+
+        /* Film Grid */
+        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+
+        /* Film Kartı (Zengin Tasarım) */
+        .movie-card {
+            background: var(--card-white); border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-soft); border: 1px solid rgba(0,0,0,0.02);
+            transition: 0.4s cubic-bezier(0.2, 1, 0.3, 1); cursor: pointer; position: relative;
+        }
+        .movie-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-bold); }
+        
+        .card-visual {
+            height: 200px; background: linear-gradient(45deg, var(--purple-vibrant), var(--pink-vibrant));
+            display: flex; align-items: center; justify-content: center; font-size: 70px; color: rgba(255,255,255,0.2);
+            position: relative;
+        }
+        .card-rating-tag {
+            position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.95);
+            padding: 6px 12px; border-radius: 12px; font-weight: 800; color: var(--navy); font-size: 14px;
+        }
+
+        .card-body { padding: 30px; }
+        .card-genre { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--pink-vibrant); margin-bottom: 12px; display: block; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.2; }
+        .card-director { font-size: 14px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+
+        /* ── MODAL (DETAY PENCERESİ) ── */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px);
+            display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s forwards; }
+        
+        .modal {
+            background: var(--card-white); width: 100%; max-width: 700px; border-radius: 32px;
+            padding: 50px; position: relative; transform: translateY(30px); transition: 0.4s;
+        }
+        .modal-overlay.active .modal { transform: translateY(0); }
+        
+        .close-btn { position: absolute; top: 30px; right: 30px; border: none; background: #f1f5f9; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 20px; }
+
+        .modal-info-box {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            background: #f8fafc; padding: 25px; border-radius: 20px; margin-top: 30px;
+        }
+        .info-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+        .info-value { font-size: 17px; font-weight: 700; color: var(--navy); display: block; margin-top: 5px; }
+
+        .btn-download-xml {
+            margin-top: 30px; width: 100%; padding: 18px; border: none; border-radius: 16px;
+            background: linear-gradient(to right, var(--purple-vibrant), var(--teal-vibrant));
+            color: white; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        }
+        .btn-download-xml:hover { transform: scale(1.02); filter: brightness(1.1); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <h1>Sine<br><span>Sinema</span></h1>
+            <p>Film veritabanı projesi. Başyapıtlarla şimdi karşınızda.</p>
+            
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Film veya tür ara..." onkeyup="handleSearch()">
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <p style="font-size: 11px; margin-bottom: 15px; opacity: 0.5; font-weight: 700; text-transform: uppercase;">Verileri indirmek için:</p>
+            <div class="dl-grid">
+                <a href="movies.xml" class="dl-card">movies.xml</a>
+                <a href="directors.xml" class="dl-card">directors.xml</a>
+                <a href="categories.xml" class="dl-card">categories.xml</a>
+                <a href="movies.ttl" class="dl-card" style="background: var(--teal-vibrant); color: white; border: none;">data.ttl (RDF)</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-header">
+            <h2>Film Arşivi</h2>
+            <span class="movie-count-badge" id="countLabel">21 Film </span>
+        </div>
+
+        <div id="movieGrid" class="movie-grid">
+            <div style="grid-column: 1/-1; text-align: center; padding: 100px; color: var(--text-muted);">
+                <p>XML verileri çekiliyor...</p>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="closeDetails()">
+        <div class="modal" id="modalBox" onclick="event.stopPropagation()">
+            </div>
+    </div>
+
+    <script>
+        let moviesData = [];
+        let dirs = {}, cats = {};
+
+        async function init() {
+            try {
+                // AŞAMA 2 & 3: 3 Farklı XML Fetch + Parsing
+                const [resM, resD, resC] = await Promise.all([
+                    fetch('movies.xml'), fetch('directors.xml'), fetch('categories.xml')
+                ]);
+
+                const parser = new DOMParser();
+                const dDoc = parser.parseFromString(await resD.text(), "application/xml");
+                const cDoc = parser.parseFromString(await resC.text(), "application/xml");
+                const mDoc = parser.parseFromString(await resM.text(), "application/xml");
+
+                // Map Directors & Categories
+                Array.from(dDoc.getElementsByTagName("director")).forEach(d => {
+                    dirs[d.getAttribute("id")] = d.getElementsByTagName("name")[0].textContent;
+                });
+                Array.from(cDoc.getElementsByTagName("category")).forEach(c => {
+                    cats[c.getAttribute("id")] = c.getElementsByTagName("name")[0].textContent;
+                });
+
+                // Map Movies
+                moviesData = Array.from(mDoc.getElementsByTagName("movie")).map(m => ({
+                    id: m.getAttribute("id"),
+                    title: m.getElementsByTagName("title")[0].textContent,
+                    year: m.getElementsByTagName("year")[0].textContent,
+                    rating: m.getElementsByTagName("rating")[0].textContent,
+                    dir: dirs[m.getElementsByTagName("dirRef")[0].textContent] || "Unknown",
+                    cat: cats[m.getElementsByTagName("genreRef")[0].textContent] || "General"
+                }));
+
+                render(moviesData);
+            } catch (e) {
+                document.getElementById("movieGrid").innerHTML = "<p style='color:red; grid-column:1/-1; text-align:center;'>Hata: XML verileri yüklenemedi. (Sunucu/CORS Hatası)</p>";
+            }
+        }
+
+        function render(list) {
+            const grid = document.getElementById("movieGrid");
+            grid.innerHTML = list.map(m => `
+                <div class="movie-card" onclick="openDetails('${m.id}')">
+                    <div class="card-visual">
+                        🎬
+                        <div class="card-rating-tag">⭐ ${m.rating}</div>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-genre">${m.cat}</span>
+                        <div class="card-title">${m.title}</div>
+                        <div class="card-director">By ${m.dir}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById("countLabel").textContent = `${list.length} Film Listelendi`;
+        }
+
+        function handleSearch() {
+            const q = document.getElementById("searchInput").value.toLowerCase();
+            render(moviesData.filter(m => m.title.toLowerCase().includes(q) || m.cat.toLowerCase().includes(q)));
+        }
+
+        function openDetails(id) {
+    const m = moviesData.find(x => x.id === id);
+    
+    // SEMANTİK BAĞ KURMA: Aynı yönetmenin diğer filmlerini bul (Linked Data mantığı)
+    const sameDirectorMovies = moviesData.filter(item => item.dir === m.dir && item.id !== m.id).slice(0, 2);
+    
+    // SEMANTİK BAĞ KURMA: Aynı türdeki diğer filmleri bul
+    const sameGenreMovies = moviesData.filter(item => item.cat === m.cat && item.id !== m.id && !sameDirectorMovies.includes(item)).slice(0, 2);
+
+    const modalBox = document.getElementById("modalBox");
+    modalBox.innerHTML = `
+        <button class="close-btn" onclick="closeDetails()">✕</button>
+        <div vocab="http://schema.org/" typeof="Movie">
+            <span class="card-genre" property="genre">${m.cat}</span>
+            <h2 class="card-title" property="name" style="font-size: 36px; margin-top: 5px;">${m.title}</h2>
+            
+            <div class="modal-info-box">
+                <div class="info-item"><span class="info-label">Yönetmen</span><span class="info-value" property="director">${m.dir}</span></div>
+                <div class="info-item"><span class="info-label">Yıl</span><span class="info-value" property="datePublished">${m.year}</span></div>
+                <div class="info-item"><span class="info-label">Puan</span><span class="info-value">⭐ ${m.rating}</span></div>
+            </div>
+
+            <div class="recommendation-section">
+                <div class="recommendation-title">🔗 Aynı yönetmenin diğer filmleri/ Benzer filmler:</div>
+                <div class="rec-grid">
+                    ${[...sameDirectorMovies, ...sameGenreMovies].map(rec => `
+                        <div class="rec-card" onclick="openDetails('${rec.id}')">
+                            <img src="${rec.poster}" class="rec-img">
+                            <div class="rec-info">
+                                <h4>${rec.title}</h4>
+                                <small>${rec.dir === m.dir ? 'Aynı Yönetmen' : 'Benzer Tür'}</small>
+                            </div>
+                        </div>
+                    `).join('')}
+                    ${(sameDirectorMovies.length + sameGenreMovies.length === 0) ? '<p style="font-size:12px; color:#94a3b8">Bu film için bir bağ bulunamadı.</p>' : ''}
+                </div>
+            </div>
+
+            <button class="btn-download-xml" onclick="downloadSingle('${m.id}')">
+                📥 Bu Veriyi XML Formatında İndir
+            </button>
+        </div>
+    `;
+    document.getElementById("modalOverlay").classList.add("active");
+        }
+        function closeDetails() { document.getElementById("modalOverlay").classList.remove("active"); }
+
+        function downloadSingle(id) {
+            const m = moviesData.find(x => x.id === id);
+            const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<movie>\n  <id>${m.id}</id>\n  <title>${m.title}</title>\n  <director>${m.dir}</director>\n  <year>${m.year}</year>\n  <rating>${m.rating}</rating>\n</movie>`;
+            const blob = new Blob([xml], {type: 'text/xml'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `${m.title}_semantic.xml`;
+            a.click();
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
