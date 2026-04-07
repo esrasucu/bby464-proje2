@@ -1,6 +1,6 @@
-# 🎬 Sine-Sinema | Web 3.0 Film Keşif Platformu
+# 🎬 Sine-Sinema | Film Keşif Platformu
 
-Sine-Sinema, sinema verilerini Web 1.0'dan Web 3.0'a uzanan bir teknoloji yelpazesinde sunan, anlamsal veri odaklı bir web uygulamasıdır. Bu proje, **BBY262 Semantik Bilgi Yönetimi** dersi kapsamında, verinin yapılandırılması (XML) ve anlamsal bir ağa (RDF) dönüştürülmesini somutlaştırmak amacıyla geliştirilmiştir.
+Sine-Sinema, sinema verilerini Web 1.0'dan Web 3.0'a uzanan bir teknoloji yelpazesinde sunan, anlamsal veri odaklı bir web uygulamasıdır. Bu proje, **BBY464 Semantik Bilgi Yönetimi** dersi kapsamında, verinin yapılandırılması (XML) ve anlamsal bir ağa (RDF) dönüştürülmesini somutlaştırmak amacıyla geliştirilmiştir.
 
 
 ---
